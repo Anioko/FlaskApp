@@ -1,0 +1,61 @@
+{% extends "error/base.html" %}
+{% block content %}
+
+    </head>
+    
+    <!-- HTML code from Bootply.com editor -->
+    
+    <body  >
+        
+        
+
+
+
+
+
+ <footer role="contentinfo" class="bs-docs-footer">
+  <div class="container">
+    <div class="bs-docs-social">
+  <ul class="bs-docs-social-buttons">
+  </ul>
+</div>
+
+
+
+    <p>Product of Teachera<a target="_blank" href="#"></a> Made in  Barcelona <a href="#">2015</a>.</p>
+  </div>
+</footer>
+
+<ul class="nav pull-right scroll-down">
+  <li><a href="#" title="Scroll down"><i class="icon-chevron-down icon-3x"></i></a></li>
+</ul>
+<ul class="nav pull-right scroll-top">
+  <li><a href="#" title="Scroll to top"><i class="icon-chevron-up icon-3x"></i></a></li>
+</ul>
+
+        
+        <!-- JavaScript jQuery code from Bootply.com editor -->
+        
+        <script type='text/javascript'>
+        
+        $(document).ready(function() {
+        
+            /* smooth scrolling for scroll to top */
+$('.scroll-top').click(function(){
+  $('body,html').animate({scrollTop:0},1000);
+})
+/* smooth scrolling for scroll down */
+$('.scroll-down').click(function(){
+  $('body,html').animate({scrollTop:$(window).scrollTop()+800},1000);
+})
+
+/* highlight the top nav as scrolling occurs */
+$('body').scrollspy({ target: '#navbar' })
+
+        
+        });
+        
+        </script>
+        
+ 
+{% endblock %}

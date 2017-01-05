@@ -1,0 +1,60 @@
+{% include "security/_messages.html" %}
+{% from "security/_macros.html" import render_field_with_errors, render_field %}
+{% from "security/common.html" import edit_field %}
+
+
+
+{% extends "base.html" %}
+<!-- Facebook Conversion Code for Other Website Conversions -Teachera -->
+<script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', '6043684916974', {'value':'0.01','currency':'USD'}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6043684916974&amp;cd[value]=0.01&amp;cd[currency]=USD&amp;noscript=1" /></noscript>
+{% block content %}
+<div  class="container signup">
+  <div class="row">
+  <div class="col-md-12">
+    <div class="login well">
+      <form action="{{ url_for_security('register') }}" method="POST" name="register_coach_user_form" class="form-horizontal">
+      {{ register_user_form.hidden_tag() }}
+      <h2>Sign up</h2>
+      <div class="control-group">
+          <div class="controls">
+              {{ edit_field(form.first_name, maxlength=255, placeholder=" First and Last name") }}
+              {{ edit_field(form.email, placeholder="Email") }}
+             
+              {{ edit_field(form.password, placeholder="Password") }}
+              {% if form.password_confirm %}
+              {{ edit_field(form.password_confirm, placeholder="Confirm Password") }}
+              {% endif %}
+              {{ edit_field(form.coach_name, placeholder="Your name") }}
+              {{ edit_field(form.website, maxlength=255, placeholder="Your's website") }}
+              {{ edit_field(form.coach_address, maxlength=255, placeholder="Your address") }}
+     
+              {{ edit_field(form.phone_number, maxlength=255, placeholder="Phone number") }}    
+        </div>
+      </div>
+
+    </form>
+    </div>
+  </div>
+
+    <h2 style="text-align:center;">You can also log in using:<br/>
+      <a href="{{url_for('login_fb')}}"><i class="fa fa-facebook"></i>  Facebook</a>
+	  </h2>
+</div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,283 @@
+{% macro detail(appt, link_title=false, show_edit=false, show_skills=true,show_currency=true, show_descriptions=true, show_tables=true) %}
+<div class="created_course">
+    {% if show_edit %}
+    <div class="edit-controls"  align="right">
+        <i class="icon-pencil"></i>
+        <a href="{{ url_for('course_edit', course_id=appt.id) }}">Edit</a>
+        <span class="inline-pad"></span>
+        <i class="icon-trash"></i>
+    </div>
+    {% endif %}
+    {% if link_title %}
+    <h3><a href="{{ url_for('course_details', course_id=appt.id, course_title=appt.course_title, course_city=appt.city) }}">{{ appt.course_title or '(No Title)' }}</a></h3>
+    <h4><a href="{{ appt.coach_website|default('') }}" target="_blank"><i class="fa fa-briefcase"></i> {{ appt.name|default('') }}</a></h4>
+    {% else %}
+    <h1>Certificate course in {{ appt.course_title or '(No Title)' }} </h1> 
+ 	<h3><a href="{{ url_for('course_apply', course_id=appt.id , course_title=appt.course_title) }}"><button  style="margin-bottom: 20px;" type="button" class="btn btn-primary btn-lg"><i class="fa fa-hand-o-right fa-lg"></i> Join this course</button></a></h3>
+    <h3><i class="fa fa-calendar-check-o"></i> {{ appt.course_start_date|default('') }} &nbsp;&nbsp;<i class="fa fa-hand-o-right"></i>&nbsp;{{ appt.course_end_date|default('')}}<i class="fa fa-graduation-cap"></i></h3> 
+    <h3><i class="fa fa-hourglass-start"></i>{{ appt.course_start_hour|default('') }} &nbsp;&nbsp;<i class="fa fa-hand-o-right"></i>&nbsp;{{ appt.course_end_hour|default('')}}<i class="fa fa-hourglass-end"></i></h3>
+    <h3><i class="fa fa-map-marker"></i> {{ appt.street_address|default('') }}, {{ appt.city|default('') }},{{ appt.country|default('') }} </h3>
+	<h3><i class="fa fa-users"></i> {{ appt.max_students|default('') }}&nbsp;&nbsp;<i class="fa fa-money">&nbsp;{{appt.cost_per_hour|int * 2.40 / appt.max_students|int * appt.hours_per_month|int}}&nbsp;</i>{% if appt.country == 'Nigeria' %}&#x20a6;{% else %}<i class="fa fa-eur"></i>{% endif %}
+</h3>
+	<h3><i class="fa fa-user"></i> 
+   {% with min_number = 4 %}
+    {{ min_number }}
+{% endwith %}&nbsp;&nbsp;<i class="fa fa-money">&nbsp;{% with min_number = 4 %}
+    {{ appt.cost_per_hour|int * 2.40  / min_number * appt.hours_per_month|int }}
+{% endwith %}&nbsp;</i>{% if appt.country == 'Nigeria' %}&#x20a6;{% else %}<i class="fa fa-eur"></i>{% endif %}</h3>
+
+	
+ <hr>
+
+ </hr>
+    <h4>Course Description</h4><!---I took out |default('')|markdown here---->
+    <div class="description">{{ appt.why_description}}</div>
+    <h4>Prerequisites and Requirements</h4><!---I took out |default('')|markdown here---->
+    <div class="description">{{ appt.prerequisites_requirements}}</div>
+    <hr>
+    {% endif %}
+
+    <div class="requirements">
+        <h4>Course Modules or Learning Program or Learning Structure:</h4>
+        {% if show_skills %}
+        <ul>
+          {% if appt.course_module_one %}
+            <li>{{ appt.course_module_one|default('')}}</li>
+          {% else %}
+          {% endif %}
+
+
+          {% if appt.course_module_two %}
+            <li>{{ appt.course_module_two|default('')}}</li>
+          {% else %}
+          {% endif %}
+
+          {% if appt.course_module_three %}
+            <li>{{ appt.course_module_three|default('')}}</li>
+          {% else %}
+          {% endif %}
+
+          {% if appt.course_module_four %}
+            <li>{{ appt.course_module_four|default('')}}</li>
+          {% else %}
+          {% endif %}
+          
+          {% if appt.course_module_five %}
+            <li>{{ appt.course_module_five|default('')}}</li>
+          {% else %}
+          {% endif %}
+
+          {% if appt.course_module_six %}
+            <li>{{ appt.course_module_six|default('')}}</li>
+          {% else %}
+          {% endif %}
+          {% if appt.course_module_seven %}
+            <li>{{ appt.course_module_seven|default('')}}</li>
+          {% else %}
+          {% endif %}
+          {% if appt.course_module_eight %}
+            <li>{{ appt.course_module_eight|default('')}}</li>
+          {% else %}
+          {% endif %}
+          {% if appt.course_module_nine %}
+            <li>{{ appt.course_module_nine|default('')}}</li>
+          {% else %}
+          {% endif %}
+          {% if appt.course_module_ten %}
+            <li>{{ appt.course_module_ten|default('')}}</li>
+          {% else %}
+          {% endif %}
+
+        </ul>
+        {% else %}
+        <p>No modules or learning structure and outcome was specified</p>
+        {% endif %}
+    <div class="requirements">
+        {% if show_descriptions %}
+        <ul>
+          {% if appt.course_module_one %}
+            <h4>{{ appt.course_module_one|default('')}}</h4>
+			<p>{{appt. module_one_description}}</p>
+          {% else %}
+          {% endif %}
+
+
+          {% if appt.course_module_two %}
+            <h4>{{ appt.course_module_two|default('')}}</h4>
+			<p>{{appt. module_two_description}}</p>
+          {% else %}
+          {% endif %}
+
+          {% if appt.course_module_three %}
+            <h4>{{ appt.course_module_three|default('')}}</h4>
+				<p>{{appt. module_three_description}}</p>
+          {% else %}
+          {% endif %}
+
+          {% if appt.course_module_four %}
+            <h4>{{ appt.course_module_four|default('')}}</h4>
+			<p>{{appt. module_four_description}}</p>
+          {% else %}
+          {% endif %}
+          
+          {% if appt.course_module_five %}
+            <h4>{{ appt.course_module_five|default('')}}</h4>
+			<p>{{appt. module_five_description}}</p>
+          {% else %}
+          {% endif %}
+
+          {% if appt.course_module_six %}
+            <h4>{{ appt.course_module_six|default('')}}</h4>
+			<p>{{appt. module_six_description}}</p>
+          {% else %}
+          {% endif %}
+          {% if appt.course_module_seven %}
+            <h4>{{ appt.course_module_seven|default('')}}</h4>
+			<p>{{appt. module_seven_description}}</p>
+          {% else %}
+          {% endif %}
+          {% if appt.course_module_eight %}
+            <h4>{{ appt.course_module_eight|default('')}}</h4>
+			<p>{{appt. module_eight_description}}</p>
+          {% else %}
+          {% endif %}
+          {% if appt.course_module_nine %}
+            <h4>{{ appt.course_module_nine|default('')}}</h4>
+			<p>{{appt. module_nine_description}}</p>
+          {% else %}
+          {% endif %}
+          {% if appt.course_module_ten %}
+            <h4>{{ appt.course_module_ten|default('')}}</h4>
+			<p>{{appt. module_ten_description}}</p>
+          {% else %}
+          {% endif %}
+
+        </ul>
+        {% else %}
+        <p>No modules or learning structure and outcome was specified</p>
+        {% endif %}
+
+	
+	{% if show_tables %}
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Cert. Level</th>
+      <th>Description</th>
+      <th>Qualifications</th>
+    </tr>
+  </thead>
+  <tbody>
+          {% if appt.level == 1 %}
+    <tr>
+      <th scope="row">1</th>
+      <td>Level 1</td>
+      <td>{{appt.course_title}} graduates at this level will have knowledge and skills for initial work, community involvement and/or further learning.</td>
+      <td>Certificate I </td>
+    </tr>
+          {% else %}
+          {% endif %}
+          {% if appt.level == 2 %}
+      <th scope="row">2</th>
+      <td>Level 2</td>
+      <td>{{appt.course_title}} graduates at this level will have knowledge and skills for work in a defined context and/or further learning.</td>
+      <td>Certificate II</td>
+    </tr>
+          {% else %}
+          {% endif %}
+          {% if appt.level == 3 %}
+      <th scope="row">3</th>
+      <td>Level 3</td>
+      <td>{{appt.course_title}} graduates at this level will have theoretical and practical knowledge and skills for work and/or further learning.</td>
+      <td>Certificate II</td>
+    </tr>
+          {% else %}
+          {% endif %}
+          {% if appt.level == 4 %}
+    <tr>
+      <th scope="row">4</th>
+      <td>Level 4</td>
+      <td>{{appt.course_title}} at this level will have theoretical and practical knowledge and skills for specialised and/or skilled work and/or further learning.</td>
+      <td>Certificate II</td>
+    </tr>
+          {% else %}
+          {% endif %}
+  </tbody>
+</table>
+		{% endif %}
+
+
+    </div>
+    {% if show_edit %}
+    <div class="edit-controls"  align="right">
+        <i class="icon-pencil"></i>
+        <a href="{{ url_for('course_edit', course_id=appt.id) }}">Edit</a>
+        <span class="inline-pad"></span>
+        <i class="icon-trash"></i>
+        <a class="course-delete-link" href="#" data-delete-url="{{ url_for('course_delete', course_id=appt.id) }}">Delete</a>
+    </div>
+    {% endif %}
+
+    <!-- Bootstrap trigger to open modal -->
+
+
+</div>
+{% endmacro %}
+
+{% macro edit_field(field, catch_kwargs=true) %}
+<div class="form-group {% if field.errors %}error{% endif %}">
+    <label for="{{ field.id }}" class="control-label">
+        {{ field.label.text }}{% if field.flags.required %} *{% endif %}:
+    </label>
+
+    {% set class_ = kwargs.pop('class_', '') %}
+    {% if field.flags.required %}
+    {% set class_ = class_ + ' required' %}
+    {% endif %}
+
+    {% if field.type == 'BooleanField' %}
+    <div class="checkbox">
+        <label>
+            {{ field(class_=class_, **kwargs) }}
+            {{ field.label.text|safe }}
+        </label>
+    </div>
+
+    {% else %}
+
+    {% if field.type in ('TextField', 'TextAreaField', 'PasswordField') %}
+    {% set class_ = class_ + ' input-xlarge form-control' %}
+
+    {% elif field.type == 'FileField' %}
+    {% set class_ = class_ + ' input-file form-control' %}
+    {% endif %}
+
+    {% if field.type == 'SelectField' %}
+    {{ field(class_=class_, **kwargs) }}
+    {% else %}
+
+    {{ field(class_=class_,  **kwargs) }}
+    {% endif %}
+
+    {% endif %}
+
+    {% if field.errors %}
+    <span class="error help-inline">{{ field.errors|join(', ') }}</span>
+    {% endif %}
+    {% if field.description %}
+    <p class="help-block">{{ field.description|safe }}</p>
+    {% endif %}
+
+</div>
+{% endmacro %}
+
+{% macro edit_field_old(field, catch_kwargs=true) %}
+<div class="control-group{% if field.errors %} error{% endif%}">
+    {{ field.label(class="control-label") }}
+    <div class="controls">
+        {{ field(**kwargs) }}
+        {% for error in field.errors %}<span class="help-inline">{{ error }}</span>{% endfor %}
+    </div>
+</div>
+{% endmacro %}
