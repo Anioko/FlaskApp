@@ -1,0 +1,394 @@
+{% extends 'base.html' %}
+
+{% from 'course/common.html' import edit_field %}
+
+{% if request.endpoint.endswith('edit') %}
+{% set title = 'Edit Courses' %}
+{% else %}
+{% set title = 'Add Courses' %}
+{% endif %}
+
+
+{% block head%}
+<link href="{{ url_for('static', filename='css/jquery.datetimepicker.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/style_coach.css') }}" rel="stylesheet">
+<script src="{{ url_for('static', filename='js/jquery.datetimepicker.js') }}" type="text/javascript"></script>
+
+{% endblock head%}
+
+{% block main %}
+<div class="container create_course">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Create Course or Class</h3>
+			<h4> Teachera.org automatically calculates the cost per hour of every class based on the minimum and maximum number of students. </h4>
+			<h4> We also take a 40 percent comission on classes facilitated through Teachera.org .Read more on our <a href="/faq">frequently asked questions section.</a></h4>
+			<h4>We request that you include the minimum number of students required before the class starts and the maximum number of students.</h4>
+			<h4>If you do not have any space use <a href="http://www.spaces-on.com/">spaces-on.com</a> to find a suitable space. Do not exceed a budget of 10 Euro per hour. Inform us by email which space you have choosen.</h4>
+			<h4> We automatically add "Certificate course" to all titles created. Name your classes appropraitely and ensure that they are well understood. </h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Cert. Level</th>
+      <th>Description</th>
+      <th>Qualifications</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Level 1</td>
+      <td>Graduate graduates at this level will have knowledge and skills for initial work, community involvement and/or further learning.</td>
+      <td>Certificate I </td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Level 2</td>
+      <td>Graduate graduates at this level will have knowledge and skills for work in a defined context and/or further learning.</td>
+      <td>Certificate II</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Level 3</td>
+      <td>Graduate graduates at this level will have theoretical and practical knowledge and skills for work and/or further learning.</td>
+      <td>Certificate II</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Level 4</td>
+      <td>Graduate at this level will have theoretical and practical knowledge and skills for specialised and/or skilled work and/or further learning.</td>
+      <td>Certificate II</td>
+    </tr>
+
+  </tbody>
+</table>			
+            <form method="post" class="">
+		<h4>Add course title e.g " Entrepreneurship "</h4>
+                {{ edit_field(form.course_title, maxlength=255,
+                placeholder=" E.g Python Programming") }}
+				<h4>Add intended salary per hour . E.g '20'</h4>
+                {{ edit_field(form.cost_per_hour, maxlength=3,
+                placeholder=" 5 or 10 or 15 or 20 or 25. No currencies only numbers. ") }}
+                {{ edit_field(form.coach_name,
+                placeholder="Your name or The name of the teacher or tutor.") }}
+                {{ edit_field(form.city, maxlength=255,
+                placeholder="City") }}
+				{{ edit_field(form.zip, maxlength=255,
+                placeholder="Zip Code") }}
+                {{ edit_field(form.country, maxlength=255,
+                placeholder="E.g. Country of location") }}
+				<h4>Add the street address of the venue</h4>
+                {{ edit_field(form.street_address, maxlength=255,
+                placeholder="E.g Course Venue") }}
+                <h4>Why should anyone take this course?</h4>
+                {{ edit_field(form.why_description,
+                placeholder="Provide descriptions and other information of this course.") }}
+                <h4>Prerequisites and requirements</h4>
+                {{ edit_field(form.prerequisites_requirements,
+                placeholder="Provide the prerequisites before they can take this course.") }}
+                <h4>Modules or the learning structure for this class or course</h4>
+                {{ edit_field(form.course_module_one, maxlength=255,
+                placeholder="E.g. Project Management Principles") }}
+                {{ edit_field(form.module_one_description,
+                placeholder="Provide descriptions of the particular module you added.") }}
+                {{ edit_field(form.course_module_two, maxlength=255,
+                placeholder="E.g. Project Phases and Processes") }}
+                {{ edit_field(form.module_two_description,
+                placeholder="Provide descriptions of the particular module you added.") }}
+                {{ edit_field(form.course_module_three, maxlength=255,
+                placeholder="E.g. Project Planning and Integration") }}
+                {{ edit_field(form.module_three_description,
+                placeholder="Provide descriptions of the particular module you added.") }}
+                {{ edit_field(form.course_module_four, maxlength=255,
+                placeholder="E.g. Project Resource Management") }}
+                {{ edit_field(form.module_four_description,
+                placeholder="Provide descriptions of the particular module you added.") }}
+                {{ edit_field(form.course_module_five, maxlength=255,
+                placeholder="E.g. Estimating Costs") }}
+                {{ edit_field(form.module_five_description,
+                placeholder="Provide descriptions of the particular module you added.") }}
+                {{ edit_field(form.course_module_six, maxlength=255,
+                placeholder="E.g. Opportunity and Risk Management") }}
+		{{ edit_field(form.module_six_description,
+                placeholder="Provide descriptions of the particular module you added.") }}
+                {{ edit_field(form.course_module_seven, maxlength=255,
+                placeholder="E.g. Plan and Control Quality") }}
+		{{ edit_field(form.module_seven_description,
+                placeholder="Provide descriptions of the particular module you added.") }}
+                {{ edit_field(form.course_module_eight, maxlength=255,
+                placeholder="E.g. Procurement and Contract Management") }}
+                {{ edit_field(form.module_eight_description,
+                placeholder="Provide descriptions of the particular module you added.") }}
+                {{ edit_field(form.course_module_nine, maxlength=255,
+                placeholder="E.g. Finance and Cost Budgeting") }}
+                {{ edit_field(form.module_nine_description,
+                placeholder="Provide descriptions of the particular module you added.") }}
+                {{ edit_field(form.course_module_ten, maxlength=255,
+                placeholder="E.g. Project Scope Management") }}
+                {{ edit_field(form.module_ten_description,
+                placeholder="Provide descriptions of the particular module you added.") }}
+				<h4>Add the start date e.g Dd-Mm-Year</h4>
+                {{ edit_field(form.course_start_date, maxlength=255,
+                placeholder="E.g. Course Start Date") }}
+				<h4>Add the end date of the class e.g Dd-Mm-Year</h4>
+                {{ edit_field(form.course_end_date, maxlength=255,
+                placeholder="E.g. Dd-Mm-Year") }}
+				<h4>Add the start time for the class e.g 19:30</h4>
+                {{ edit_field(form.course_start_hour, maxlength=255,
+                placeholder="E.g. 19:30") }}
+				<h4>Add the end time for the class e.g 19:30</h4>
+                {{ edit_field(form.course_end_hour, maxlength=255,
+                placeholder="E.g. 20:30") }}
+				<h4>Total Course Hours Per Month e.g '16'</h4>
+                {{ edit_field(form.hours_per_month, maxlength=3,
+                placeholder="E.g. 16. Only numbers allowed") }}
+				<h4>Add the maximum number of students for the class e.g '10'</h4>
+                {{ edit_field(form.max_students, maxlength=3,
+                placeholder="E.g. 10. Only numbers allowed") }}	
+				<h4>Add the minimum number of students before the class starts e.g '8'</h4>
+                {{ edit_field(form.min_students, maxlength=3,
+                placeholder="E.g. 8. Only numbers allowed") }}
+		<h4>Add the certificate level</h4>
+                {{ edit_field(form.level, maxlength=2,
+                placeholder="E.g. 1. Only numbers allowed") }}
+                {{ edit_field(form.bio_of_teacher,
+                placeholder="Provide description on the teacher of this course.") }}	
+
+	
+                <div class="form-actions">
+                    <button type="submit" class="btn submit">Save</button>
+                    <a href="{{ url_for('course_list') }}" class="btn cancel">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- CSS code from Bootply.com editor -->
+
+<style type="text/css">
+/* -- custom css for Bootstrap 3.x --*/
+
+/* move special fonts to HTML head for better performance */
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:200,300,400,600');
+
+html,
+body {
+height: 100%;
+width: 100%;
+
+}
+body {
+
+font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 15px;
+line-height: 1.42857;
+}
+
+/* fix bs3 horizontal scrollbar bug */
+.row { margin: 0; padding: 0 }
+
+h1 {
+font-size:50px;
+}
+
+
+
+h4, p, h5, h6 {
+
+font-family: inherit;
+font-weight: 300;
+line-height: 1.1;
+}
+
+img.grayscale {
+filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */
+filter: gray; /* IE6-9 */
+-webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+.icon-bar {
+background-color:#fff;
+}
+
+.scroll-down a, .scroll-top a {
+color:#ffffff;
+}
+
+.scroll-down {
+course:fixed;
+bottom:20%;
+right:0%;
+color:#f9f9f9;
+}
+
+.scroll-top {
+background-color:#33ee67;
+}
+
+.header .btn-lg {
+font-size:28px;
+border-color:#eeeeee;
+padding:15px;
+background-color:transparent;
+color:#ffffff;
+}
+
+.header .btn-lg:hover {
+background-color:#eeeeee;
+color:#777777;
+}
+
+.navbar a {
+color:#fff;
+}
+
+.navbar-bold.affix {
+background-color:#33ee67;
+}
+
+.navbar-bold {
+background-color:#11cc45;
+font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.navbar-bold li a:hover {
+background-color:#00bb34;
+}
+
+.navbar-bold li.active {
+background-color:#00bb34;
+}
+
+.vert {
+vertical-align: middle;
+width:100%;
+padding-top:4%;
+}
+
+.header h1 {
+font-size:110px;
+-webkit-text-stroke: 1px rgba(0,0,0,0.1);
+color:#431a6d;
+color:#fff;
+margin-left:-5px;
+margin-bottom:5px;
+font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.header .lead {
+color:#eeeeee;
+font-size:25px;
+}
+
+.header {
+height: 80%;
+background: #2B3E50;
+}
+
+.blurb {
+padding: 120px 0;
+background-color:#fefefe;
+}
+
+.blurb .panel {
+background-color:transparent;
+}
+
+.bright {
+background: #7fbbda url('http://www.bootply.com/assets/example/bg_suburb.jpg') no-repeat center center fixed;
+color:#fff;
+}
+
+.featurette {
+background: #545455;
+padding: 50px 0;
+color: #ffffff;
+}
+
+.featurette-item {
+margin-bottom: 15px;
+}
+
+.featurette-item > i {
+border: 3px solid #ffffff;
+border-radius: 50%;
+display: inline-block;
+font-size: 56px;
+width: 140px;
+height: 140px;
+line-height: 136px;
+vertical-align: middle;
+text-align: center;
+}
+
+.featurette-item > i:hover {
+font-size: 68px;
+}
+
+.callout {
+color: #ffffff;
+padding-top:7%;
+height: 100%;
+width: 100%;
+background: url('http://www.bootply.com/assets/example/bg_suburb.jpg') no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+
+.gallery {
+padding: 50px 0;
+}
+
+.call-to-action {
+background: #eeeeee;
+padding: 50px 0;
+}
+
+.call-to-action .btn {
+margin: 10px;
+}
+
+
+
+footer {
+padding: 100px 0;
+}
+
+.panel {
+background-color: #FFFFFF;
+border: 1px solid rgba(0, 0, 0, 0);
+border-radius: 0;
+box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+margin-bottom: 21px;
+}
+
+.center {
+float: none;
+margin-left: auto;
+margin-right: auto;
+}
+
+
+/* -- end custom css for Bootstrap 3.x --*/
+
+</style>
+
+
+
+<script type="text/javascript">
+(function () {
+$("textarea#description").pagedownBootstrap();
+})();
+if ($(window).width() > 500) {
+    $('#pub_date').datetimepicker({
+  format:'Y-m-d H:m:s'
+});
+}
+
+</script>
+
+{% endblock main %}

@@ -1,0 +1,216 @@
+{% macro detail(appt, link_title=true, show_edit=true, show_summary=true, show_modules=true) %}
+
+    <div class="course-detail">
+      {% if show_edit %}
+      <div class="edit-controls">
+        <a href="{{ url_for('course_edit', course_id=appt.id) }}"><i class="fa fa-pencil"></i></a>
+        <a href="{{ url_for('course_list_applicants', course_id=appt.id) }}"><i class="fa fa-user"></i> <!--<span class="attendees_applied">3</span> --></a>
+      </div>
+    {% endif %}
+
+    {% if link_title %}
+      <div class="course_title">
+        <h3>
+          <a href="{{ url_for('course_details', course_id=appt.id, course_title=appt.course_title, city=appt.city) }}">{{ appt.course_title or '(No Title)' }} in {{appt.city}}</a>
+        </h3>
+      </div>
+    {% else %}
+      <h1 align="center">{{ appt.course_title or '(No Title)' }} in {{appt.city}}</h1>
+
+     <hr>
+
+     <h3 align="center"> Course Description</h3>
+     <h6 align="center">{{ appt.description }}</h6>
+   <hr>   
+    {% endif %}
+
+    <!-- CREATED courseS VIEW -->
+      <div class="date_published">
+        <h4>Published:</h4>
+        <span><i class="fa fa-calendar"></i> {{appt.created.strftime('%d.%m.%Y ')}}</span>
+      </div>
+      <div class="url">
+
+      </div>
+     <div onclick="location.href='{{ url_for('course_details', course_id=appt.id, course_title=appt.course_title, city=appt.city) }}';" style="cursor: pointer;">
+      <div class="requirements">
+        <h4><i class="fa fa-list"></i> Modules:</h4>
+        {% if show_modules %}
+        <ul>
+          {% if appt.course_module_one %}
+            <li>{{ appt.course_module_one|default('')}}</li>
+          {% else %}
+          {% endif %}
+
+          {% if appt.course_module_two %}
+            <li>{{ appt.course_module_two|default('')}}</li>
+          {% else %}
+          {% endif %}
+
+          {% if appt.course_module_three %}
+            <li>{{ appt.course_module_three|default('')}}</li>
+          {% else %}
+          {% endif %}
+
+          {% if appt.course_module_four %}
+            <li>{{ appt.course_module_four|default('')}}</li>
+          {% else %}
+          {% endif %}
+          
+          {% if appt.course_module_five %}
+            <li>{{ appt.course_module_five|default('')}}</li>
+          {% else %}
+          {% endif %}
+
+          {% if appt.course_module_six %}
+            <li>{{ appt.course_module_six|default('')}}</li>
+          {% else %}
+          {% endif %}
+          {% if appt.course_module_seven %}
+            <li>{{ appt.course_module_seven|default('')}}</li>
+          {% else %}
+          {% endif %}
+          {% if appt.course_module_eight %}
+            <li>{{ appt.course_module_eight|default('')}}</li>
+          {% else %}
+          {% endif %}
+          {% if appt.course_module_nine %}
+            <li>{{ appt.course_module_nine|default('')}}</li>
+          {% else %}
+          {% endif %}
+          {% if appt.course_module_ten %}
+            <li>{{ appt.course_module_ten|default('')}}</li>
+          {% else %}
+          {% endif %}
+        </ul>
+          {% else %}
+        <h4><i class="fa fa-external-link-square"></i> View complete details:</h4>
+        <a href="{{ url_for('course_details', course_id=appt.id, course_title=appt.course_title, city=appt.city) }}"></a>
+       {% endif %}
+     </div>
+
+
+
+
+     
+     {% if show_summary and appt.summary_title %}
+      <!---<div class="row">
+        <p class="span5">-->
+          {{ appt.summary_title | nl2br }}
+        <!--</p>
+      </div>-->
+       {% endif %}
+
+</div>
+
+
+{% endmacro %}
+
+{% macro render_field(field) -%}
+    {% set with_label = kwargs.pop('with_label', False) %}
+    {% set placeholder = '' %}
+    {% if not with_label %}
+        {% set placeholder = field.label.text %}
+    {% endif %}
+    <div class="form-group {% if field.errors %}error{% endif %}">
+        {% if with_label %}
+            <label for="{{ field.id }}" class="control-label">
+                {{ field.label.text }}{% if field.flags.required %} *{% endif %}:
+            </label>
+        {% endif %}
+
+        {% set class_ = kwargs.pop('class_', '') %}
+        {% if field.flags.required %}
+            {% set class_ = class_ + ' required' %}
+        {% endif %}
+
+        {% if field.type == 'BooleanField' %}
+            <div class="checkbox">
+                <label>
+                    {{ field(class_=class_, **kwargs) }}
+                    {{ field.label.text|safe }}
+                </label>
+            </div>
+
+        {% else %}
+
+            {% if field.type in ('TextField', 'TextAreaField', 'PasswordField') %}
+                {% set class_ = class_ + ' input-xlarge form-control' %}
+
+            {% elif field.type == 'FileField' %}
+                {% set class_ = class_ + ' input-file form-control' %}
+            {% endif %}
+
+            {% if field.type == 'SelectField' %}
+                {{ field(class_=class_, **kwargs) }}
+            {% else %}
+
+            {{ field(class_=class_, placeholder=placeholder, **kwargs) }}
+            {% endif %}
+
+        {% endif %}
+        {% if field.errors %}
+            <span class="error help-inline">{{ field.errors|join(', ') }}</span>
+        {% endif %}
+        {% if field.description %}
+            <p class="help-block">{{ field.description|safe }}</p>
+        {% endif %}
+    </div>
+{%- endmacro %}
+
+{% macro edit_field(field, catch_kwargs=true) %}
+  <div class="form-group {% if field.errors %}error{% endif %}">
+    <label for="{{ field.id }}" class="control-label">
+        {{ field.label.text }}{% if field.flags.required %} *{% endif %}:
+    </label>
+
+        {% set class_ = kwargs.pop('class_', '') %}
+        {% if field.flags.required %}
+            {% set class_ = class_ + ' required' %}
+        {% endif %}
+
+        {% if field.type == 'BooleanField' %}
+            <div class="checkbox">
+                <label>
+                    {{ field(class_=class_, **kwargs) }}
+                    {{ field.label.text|safe }}
+                </label>
+            </div>
+
+        {% else %}
+
+            {% if field.type in ('TextField', 'TextAreaField', 'PasswordField') %}
+                {% set class_ = class_ + ' input-xlarge form-control' %}
+
+            {% elif field.type == 'FileField' %}
+                {% set class_ = class_ + ' input-file form-control' %}
+            {% endif %}
+
+            {% if field.type == 'SelectField' %}
+                {{ field(class_=class_, **kwargs) }}
+            {% else %}
+
+            {{ field(class_=class_,  **kwargs) }}
+            {% endif %}
+
+        {% endif %}
+
+        {% if field.errors %}
+            <span class="error help-inline">{{ field.errors|join(', ') }}</span>
+        {% endif %}
+        {% if field.description %}
+            <p class="help-block">{{ field.description|safe }}</p>
+        {% endif %}
+
+  </div>
+{% endmacro %}
+
+{% macro edit_field_old(field, catch_kwargs=true) %}
+  <div class="control-group{% if field.errors %} error{% endif%}">
+    {{ field.label(class="control-label") }}
+    <div class="controls">
+      {{ field(**kwargs) }}
+      {% for error in field.errors %}<span class="help-inline">{{ error }}</span>{% endfor %}
+    </div>
+  </div>
+{% endmacro %}

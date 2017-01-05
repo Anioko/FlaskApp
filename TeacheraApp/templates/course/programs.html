@@ -1,0 +1,150 @@
+<link rel="image_src" href="http://teachera.org/static/img/happy-programmers-women.jpg" />
+<link rel="image_src" href="http://teachera.org/static/img/small-group-class.jpg" />
+<link rel="image_src" href="http://teachera.org/static/img/group_class.jpg" />
+<link rel="image_src" href="http://teachera.org/static/img/yoga_group.jpg" />
+<link rel="image_src" href="http://teachera.org/static/img/group-dance-classes-01.jpg" />
+<link rel="image_src" href="http://teachera.org/static/img/programming-training.jpg" />
+<link rel="image_src" href="http://teachera.org/static/img/Classroom+group+big+youths.JPG" />
+{% extends 'base.html' %}
+
+{% from 'course/pommons.html' import detail %}
+
+{% block title_b %}{{ appt.course_title }} {{ appt.city }}  on Teachera.org -{% endblock title_b %}
+{% block description_b %}{{appt.description|default('')}}{% endblock description_b %}
+
+
+
+{% block head%}
+ 
+<link href="{{ url_for('static', filename='css/style_course.css') }}" rel="stylesheet">
+
+<!-- Hotjar Tracking Code for http://teachera.org -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:127342,hjsv:5};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+{% endblock head%}
+
+{% block main %}
+
+  <div class="container coach_details ">
+
+    {{ detail(appt) }}
+    <div class="row edit-controls" align="center">
+   {% if(current_user.coach == True ) %}
+       <a href="{{ url_for('program_list_applicants', program_id=appt.id) }}"><button type="button" class="btn btn-primary"><i class="fa fa-list-alt fa-lg"></i> View attendees</button></a>
+   {% endif %}
+   {% if(current_user.coach == False ) %}
+      <a href="{{ url_for('program_apply', program_id=appt.id , course_title=appt.course_title) }}"><button  style="margin-bottom: 20px;" type="button" class="btn btn-primary btn-lg"><i class="fa fa-hand-o-right fa-lg"></i> Join this course</button></a>
+      <a href="{{ url_for('program_list_applicants', program_id=appt.id) }}"><button type="button" class="btn btn-primary"><i class="fa fa-list-alt fa-lg"></i> View attendees</button></a>
+   {% endif %}
+   {% if anonym %}
+	<a href="{{ url_for('program_apply', program_id=appt.id , course_title=appt.course_title) }}"><button  style="margin-bottom: 20px;" type="button" class="btn btn-primary btn-lg"><i class="fa fa-hand-o-right fa-lg"></i> Join this course</button></a>	{% endif %}
+  </div>
+  </div>
+
+<div class="container share">
+<!--<div style="text-align:center;" class="row btn-group">-->
+<div class="row" align="center">
+
+  <a href="http://www.facebook.com/sharer.php?u={{ url_for('program_details',program_id=appt.id, course_title=appt.course_title,_external=True)}}" title="On Facebook" target="_blank" class="btn btn-default" style="margin-right:-10px;">
+    <i class="fa fa-facebook fa-2x"></i>
+  </a>
+
+  <a href="https://twitter.com/intent/tweet?url={{ url_for('program_details',program_id=appt.id,course_title=appt.course_title,_external=True)}}&via=Teachera&text={{appt.course_title}}%20-%20Teachera.org!&hashtags={{appt.course_title}},{{appt.city}}" title="On Twitter" target="_blank" class="btn btn-default" style="margin-right:-10px;">
+    <i class="fa fa-twitter fa-2x"></i>
+  </a>
+
+
+  <a href="http://www.linkedin.com/shareArticle?mini=true&url={{ url_for('program_details',program_id=appt.id,course_title=appt.course_title,_external=True)}}&title={{appt.course_title}} in {{appt.city}}&summary=Teachera.org!&source=http://Teachera.org" title="On LinkedIn" target="_blank" class="btn btn-default" style="margin-right:-10px;">
+    <i class="fa fa-linkedin fa-2x"></i>
+  </a>
+
+  <a href="http://vk.com/share.php?url={{ url_for('program_details',program_id=appt.id,course_title=appt.course_title,_external=True) }}&title={{appt.course_title}} in {{appt.city}}&description=Teachera.org!&image=https%3A%2F%2Ffbcdn-sphotos-g-a.akamaihd.net%2Fhphotos-ak-frc3%2Ft1%2F10007500_219483098251971_1640217409_n.jpg" title="On VK.com" target="_blank" class="btn btn-default" style="margin-right:-10px;">
+    <i class="fa fa-vk fa-2x"></i>
+  </a>
+
+  <a data-toggle="modal" href="#share-email-modal" class="btn btn-default" style="margin-right:-10px;">
+    <i class="fa fa-share-alt fa-2x"></i>
+  </a>
+
+ </div>
+
+<div class="modal" id="share-email-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Share class via e-mail</h4>
+      </div>
+        <form class="form-horizontal well" data-async id="emailForm" data-target="#rating-modal" >
+      <div class="modal-body">
+          <!-- The async form to send and replace the modals content with its response -->
+        <fieldset>
+            <!-- form content -->
+          <div class="form-group">
+            <label for="email">Friends email address:</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email">
+        </div>
+        </fieldset>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="emailCloseBtn">Close</button>
+        <button type="button" class="btn btn-primary" id="emailSaveBtn">Send</button>
+      </div>
+        </form>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+    jQuery(function($) {
+    $('form[data-async] #emailSaveBtn').click(function(event) {
+        var $form = $(this);
+        var $target = $($form.attr('data-target'));
+
+        $.ajax({
+            type: 'POST',
+            url: '/some-endpoint',
+            data: { email:$('#email').val(),
+                    url:'{{ url_for('program_details',program_id=appt.id,course_title=appt.course_title,_external=True) }}',
+                    title:'{{appt.course_title}}',
+                  },
+
+            success: function(data, status) {
+                console.log("success");
+                $('#share-email-modal').modal('hide');
+                $('#share-email-modal').modal('hide');
+                }
+
+        });
+        $('#share-email-modal').modal('hide');
+
+        event.preventDefault();
+    });
+});
+$('#share-email-modal').on('hidden.bs.modal', function (e) {
+  $('#share-email-modal').modal('hide');
+})
+</script>
+
+
+<style>
+body {
+
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 15px;
+    line-height: 1.42857;
+}
+</style>
+
+{% endblock main %}
