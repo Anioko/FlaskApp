@@ -1,0 +1,84 @@
+.applicants table {
+	font-size: 1.2em;
+	color: #1C3766;
+}
+.created_course {
+	font-family:'Lato',sans-serif;
+	color: #1C3766;
+}
+.created_course h1 {
+	font-size: 4em;
+	font-weight: 600;
+}
+.created_course h2 {
+	font-size: 2.5em;
+	font-weight: 400;
+}
+.created_course h3 {
+	font-size: 1.6em;
+	margin: 10px 0 15px 0;
+	font-weight: 500;
+}
+.created_course h4 {
+	font-size: 1.6em;
+	font-weight: bold;
+}
+.created_course p,
+.created_course li {
+	font-size: 1.3em;
+}
+.created_course a {
+	color: #5B6C7E;
+	text-decoration: none;
+	-webkit-transition: color .3s;
+	-o-transition: color .3s;
+	transition: color .3s;
+	font-weight: 500;
+	border-bottom: 2px solid;
+}
+.created_course a:hover {
+	color: #EC5805;
+	text-decoration: none;
+}
+
+.created_course h1,
+.created_course h2,
+.created_course h3 {
+	text-align: center;
+}
+
+.created_course .requirements ul li{
+	course: relative;
+	text-transform: uppercase;
+	font-weight: 500;
+}
+.company_details {
+	padding: 60px 15px 10px 15px;
+}
+
+.share {
+	padding-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+	.created_course h1 {
+		font-size: 2.7em;
+	}
+	.created_course h2 {
+		font-size: 2em;
+	}
+	.created_course h3 {
+		font-size: 1.4em;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+

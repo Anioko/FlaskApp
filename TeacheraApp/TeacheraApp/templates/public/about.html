@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block head%}
+<link href="{{ url_for('static', filename='css/style_public.css') }}" rel="stylesheet">
+{% endblock head%}
+
+{% block content %}
+
+        <!-- CSS code from Bootply.com editor -->
+        
+        <style type="text/css">
+            /* -- custom css for Bootstrap 3.x --*/
+
+/* move special fonts to HTML head for better performance */
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:200,300,400,600');
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+/* fix bs3 horizontal scrollbar bug */
+.row { margin: 0; padding: 0; }
+
+h1 {
+  font-size:50px; 
+}
+
+
+
+h1, h4, p, h5, h6, p {
+     color: #1C3766;
+    font-family:'Lato',sans-serif;
+    font-weight: 200;
+    line-height: 1.1;
+}
+
+
+</style>
+        
+        
+
+
+<div class="header vert about">
+  <div class="container">
+    
+    <h1>About Us</h1>
+
+  </div>
+</div>
+
+<div class="container">
+  <div class="cofounder">
+    <div class="col-md-2">
+      <!----<img src="{{ url_for('static', filename='img/jarmo.png') }}" alt="Jarmo Hakulinen">---->
+    </div>
+    <div class="col-md-10">
+      <h4>Stephen Harrison (Academic Director)</h4>
+      <div class="btn-group">
+        <a href="https://about.me/stephen_harrison" target="_blank"><i class="fa fa-facebook-square"></i></a>
+        <a href="https://www.linkedin.com/in/stephenlharrison" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+        <a href="mailto:info@Teachera.org"><i class="fa fa-envelope-square"></i></a>
+      </div>
+      <p>Stephen Harrison, President of Gerentes Internacionales S.A (Panama). Born in the UK, he has lived in Malaysia, Holland, Colombia, and Africa but has been living in Spain since 2007. He is a former naval officer and airline pilot and has an MBA specializing in Marketing.</p><p> Stephen has worked as an advisor for the UKs Department of Trade and Industry and governments of Uganda and Colombia.He is also an Associate Professor at a various Barcelona universities teaching management and marketing topics for the MBA course. He has given seminars to universities and companies to groups of up to 400 people and appeared on British and Spanish national television.  He has broad experience in the financial services and business consultancy sector; starting up companies in 7 countries and 3 continents.</p><p> His company recently completed feasibility studies for airlines in Nigeria and Kazakhstan and currently has multi-million dollar deals pending in the US. He has recently started studying for a PhD in International Marketing and has just published his new book on making money online.</p>
+    </div>
+  </div>
+  <div class="cofounder">
+    <div class="col-md-2">
+      <!-----<img src="{{ url_for('static', filename='img/ani.png') }}" alt="Aniekan Okono">------->
+    </div>
+    <div class="col-md-10">
+  	  <h4>Aniekan Okono (Product and Business Director)</h4>
+      <div class="btn-group">
+        <a href="https://twitter.com/anioko1" target="_blank"><i class="fa fa-twitter-square"></i></a>
+        <a href="https://www.facebook.com/aokono" target="_blank"><i class="fa fa-facebook-square"></i></a>
+        <a href="https://www.linkedin.com/pub/aniekan-okono/2b/b72/686" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+        <a href="mailto:info@Teachera.org"><i class="fa fa-envelope-square"></i></a>
+      </div>
+      <p>Aniekan is a passionate and dedicated person full with tenacity and grit. 
+	He is enthusiastic about providing people with the education that they need. 
+	He has a BBA in Business Administration from Centria University of Applied Sciences in Finland.</p>
+	<p> Aniekan has skills in Business Development, Business Planning, Recruitment, Sales, frontend web development, 
+	backend web development with Python/Flask. </p>
+      <p>Aniekan knows first hand what it means to have a desire to learn a skill and there are not enough funds or resources or available teachers. He hopes that this venture will enable people find face to face classes that are affordable</p>
+      <p> Aniekan also believes in offering people with transferable skills the ability to form group classes, get more students or get the classes started in a way economical for the students. </p>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<div class="center_w_margin">
+  <div class="btn-group">
+    <button class="btn btn-default disabled">
+      Share:
+    </button>
+
+    <a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2FTeachera.org&amp;t=Url%20Encoded%20Text" title="On Facebook" target="_blank" class="btn btn-default">
+      <i class="fa fa-facebook fa-lg fb"></i>
+    </a>
+
+    <a href="http://twitter.com/share?url=http%3A%2F%2FTeachera.org&amp;text=Url%20Encoded%20Text" title="On Twitter" target="_blank" class="btn btn-default">
+      <i class="fa fa-twitter fa-lg tw"></i>
+    </a>
+
+
+    <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2FTeachera.org" title="On LinkedIn" target="_blank" class="btn btn-default">
+      <i class="fa fa-linkedin fa-lg linkin"></i>
+    </a>
+
+    <a href="http://vk.com/share.php?url=http%3A%2F%2FTeachera.org&amp;title=Url%20Encoded%20Title&amp;description=Url%20Encoded%20Text&amp;image=https%3A%2F%2Ffbcdn-sphotos-g-a.akamaihd.net%2Fhphotos-ak-frc3%2Ft1%2F10007500_219483098251971_1640217409_n.jpg" title="On VK.com" target="_blank" class="btn btn-default">
+      <i class="fa fa-vk fa-lg vk"></i>
+    </a>
+
+    <a href="http://www.pinterest.com/pin/create/button/?url=http%3A%2F%2FTeachera.org&amp;description=Url%20Encoded%20Text&amp;media=https%3A%2F%2Ffbcdn-sphotos-g-a.akamaihd.net%2Fhphotos-ak-frc3%2Ft1%2F10007500_219483098251971_1640217409_n.jpg" title="Pin It" target="_blank" class="btn btn-default">
+      <i class="fa fa-pinterest fa-lg pinterest"></i>
+    </a>
+  </div>
+</div>
+
+
+        
+        <!-- JavaScript jQuery code from Bootply.com editor -->
+        
+        <script type='text/javascript'>
+        
+        $(document).ready(function() {
+        
+            /* smooth scrolling for scroll to top */
+$('.scroll-top').click(function(){
+  $('body,html').animate({scrollTop:0},1000);
+})
+/* smooth scrolling for scroll down */
+$('.scroll-down').click(function(){
+  $('body,html').animate({scrollTop:$(window).scrollTop()+800},1000);
+})
+
+/* highlight the top nav as scrolling occurs */
+$('body').scrollspy({ target: '#navbar' })
+
+        
+        });
+        
+        </script>
+        
+ 
+{% endblock %}

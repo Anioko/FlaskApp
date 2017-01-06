@@ -1,0 +1,39 @@
+<link rel="image_src" href="http://teachera.org/static/img/happy-programmers-women.jpg" />
+<link rel="image_src" href="http://teachera.org/static/img/small-group-class.jpg" />
+<link rel="image_src" href="http://teachera.org/static/img/group_class.jpg" />
+<link rel="image_src" href="http://teachera.org/static/img/yoga_group.jpg" />
+<link rel="image_src" href="http://teachera.org/static/img/group-dance-classes-01.jpg" />
+<link rel="image_src" href="http://teachera.org/static/img/programming-training.jpg" />
+<link rel="image_src" href="http://teachera.org/static/img/Classroom+group+big+youths.JPG" />
+{% extends 'base.html' %}
+
+
+{% block title_b %}{{ course.course_title }} {{ course.city }}  on Teachera.org -{% endblock title_b %}
+{% block description_b %}{{course.description|default('')}}{% endblock description_b %}
+
+
+
+{% block head%}
+ 
+<link href="{{ url_for('static', filename='css/style_course.css') }}" rel="stylesheet">
+
+
+{% endblock head%}
+
+{% block main %}
+
+
+ <form action="/private/group/courses/{{course.course_title}}/{{course.id}}/charge" method="post">
+    <article>
+      <label>
+        <span>Amount is &euro; {{amount}}</span>
+      </label>
+    </article>
+
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="{{ key }}"
+            data-description="Teachera Payment"
+            data-amount="{{amount}}"
+            data-locale="auto"></script>
+  </form>
+{% endblock main %}

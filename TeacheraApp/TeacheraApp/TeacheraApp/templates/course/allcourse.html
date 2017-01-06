@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+<!-- Hotjar Tracking Code for http://teachera.org -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:127342,hjsv:5};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+{% block title %}course{% endblock title %}
+
+{% block main %}
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category, message in messages %}
+  <div class="alert alert-{{ category }} alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{ message|safe }}</div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+ <div class="jumbotron jumbotron-carousel hidden-print">
+  <div class="container">
+    <div class="row">
+      <div class="text-center">
+        <h1>List of courses available</h1>
+        <!-----<p>Affordable, flexible and fun!</p>---->
+        <div class="actions">
+          <!----<a class="btn btn-default btn-lg" href="https://docs.google.com/forms/d/1KbLW2gmJ5QRO5_KQ7G5vsYuF8VnSq45pp5-7PN63JGQ/viewform" data-toggle="modal">
+            <i class="fa fa-download fa-lg"></i>&nbsp;
+            Attend
+          </a>---->
+        </div>
+      </div>
+      <div class="noDiv">
+        <div id="icon-carousel" class="carousel slide">
+          <!-- Carousel items -->
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container">
+  
+  <section class="hidden-print">
+  <div class="stripe-ad">
+    <!----<script src="https://cdn.fusionads.net/fusion.js?zoneid=1332&amp;serve=C6SDP2Y&amp;placement=fontawesome" id="_fusionads_js"></script>---->
+
+    
+  <p class="lead">
+    <!---You can put text here --->
+  </p>
+  
+  </div>
+</section>
+
+
+  <section id="why" class="feature-list">
+  <div class="row">
+{% for appt in appts %}
+    <div class="col-md-4 col-sm-6">
+      <h4><i class="fa fa-flag"></i><a href="{{ url_for('course_details', course_id=appt.id, course_title=appt.course_title, city=appt.city) }}">{{ appt.course_title }}</a></h4>
+                  {{ appt.description }} {{ appt.city }}
+
+    </div>
+  {% endfor %}
+ </div>
+</section>
+</div>
+  </div>
+
+
+{% endblock main %}
