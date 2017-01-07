@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% from 'course/common.html' import detail %}
+
+{% block title %}Course{% endblock title %}
+
+
+
+{% block main %}
+
+
+
+<div class="container company_details" style="padding-top: 30px;">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category, message in messages %}
+  <div class="alert alert-{{ category }} alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{ message|safe }}</div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+  <div class="created_vacancies">
+    
+    {% if not appts %}
+        
+        <h3>Here you will see all the clases or courses you've created. It looks like you dont have any yet. Go ahead, <a href="{{ url_for('course_create') }}">create</a> one!</h3>
+
+    {% endif %}
+    <div class="row">
+    {% for appt in appts %}
+      
+        <div class="vacancy_card" style="width: 325px; height: 311px;">
+            <h5>{{ detail(appt, link_title=true, show_edit=true, show_modules=false) }}</h5>
+        </div>
+      
+        {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+        <!-- CSS code from Bootply.com editor -->
+        
+        <style type="text/css">
+            /* -- custom css for Bootstrap 3.x --*/
+
+
+.vacancy_card {
+    background: #fafafa none repeat scroll 0 0;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(60, 60, 60, 0.2);
+    display: inline-block;
+    height: auto;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    position: relative;
+    width: 100%;
+}
+/* -- end custom css for Bootstrap 3.x --*/
+
+        </style>
+
+{% endblock main %}

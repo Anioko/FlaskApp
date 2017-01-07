@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="google-site-verification" content="Vrn1u7x7MR5PRxaZ2y8TSyixybVPX_T4PRQDYvSxRGM" />
+    <meta name="description" content="{% block description_b %}{% endblock description_b %}"/>
+    <meta property="og:image"         content="http://teachera.org/static/img/girls_group_class.jpg" />
+
+    <meta property="og:image"         content="http://teachera.org/static/img/group_sightseeing.jpg" />
+    <meta property="og:image"         content="http://teachera.org/static/img/group-dance-classes-01.jpg" />
+    <meta property="og:image"         content="http://teachera.org/static/img/tai-chi-classes-beach.jpg" />
+    <meta property="og:image"         content="http://teachera.org/static/img/yoga_group.jpg" />
+    <meta property="og:image"         content="http://teachera.org/static/img/group_class.jpg" />
+    <meta property="og:image"         content="http://teachera.org/static/img/small-group-class.jpg" />
+    <title>{% block title_b %}{% endblock title_b %}</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="{{ url_for('static', filename='pygments.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='site.css') }}">
+	<link rel="image_src" href="http://www.teachera.org/static/img/Teachera.jpg" />
+	<link rel="image_src" href="http://www.teachera.org/static/img/girls_group_class.jpg" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="./bower_components/html5shiv/dist/html5shiv.js"></script>
+      <script src="./bower_components/respond/dest/respond.min.js"></script>
+    <![endif]-->
+<!-- Facebook Conversion Code for Other Website Conversions -Teachera -->
+<script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', '6043684916974', {'value':'0.01','currency':'USD'}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6043684916974&amp;cd[value]=0.01&amp;cd[currency]=USD&amp;noscript=1" /></noscript>
+
+
+    <script>
+      $(function() {
+        $(".course-delete-link").on("click", function() {
+          var delete_url = $(this).attr('data-delete-url');
+          $.ajax({
+            url: delete_url,
+            type: 'DELETE',
+            success: function(response) {
+              if (response.status == 'OK') {
+                window.location = {{ url_for('course_list') }};
+              } else {
+                alert('Delete failed.')
+              }
+            }
+          });
+          return false;
+        });
+      });
+    </script>
+
+<!----Firehose chat script----->
+<script type="text/javascript">
+  var FHChat = {product_id: "aa51aeaf7ad7"};
+  FHChat.properties={};FHChat.set=function(key,data){this.properties[key]=data};!function(){var a,b;return b=document.createElement("script"),a=document.getElementsByTagName("script")[0],b.src="https://chat-client-js.firehoseapp.com/chat-min.js",b.async=!0,a.parentNode.insertBefore(b,a)}();
+</script>
+  {% block head %}{% endblock %}
+  </head>
+  <body id="home">
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '525684897599050',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+  <div id="wrap"> <!-- necessary for sticky footer. wrap all content except footer -->
+    <div class="collapse hidden-print" id="banner">
+  <div class="container">
+    <div class="message-container">
+      <div class="tagline">
+        <span id="rotating-message"></span>
+      </div>
+      <div class="action">
+        <a id="rotating-url" class="btn btn-primary btn-block" href=""></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="navbar navbar-inverse navbar-static-top hidden-print">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa fa-bars fa-lg"></i>
+      </button>
+      <a href="/" class="navbar-brand"> Teachera</a>
+    </div>
+
+        <div class="navbar-collapse collapse">
+            {% if current_user.is_authenticated %}
+                {% if(current_user.has_role('ROLE_COACH') == True )
+                %}
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('course_create') }}">Create Course</a></li>
+                    <li><a href="{{ url_for('course_list') }}"><i class="fa fa-check"></i> My Classes</a></li>
+                    <li><a href="/list/courses/"><i class="fa fa-check"></i> All Classes</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="/faq">Faq</a></li>
+                </ul>
+                {% else %}
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('resumes_list') }}"><i class="fa fa-check"></i> Dashboard</a></li>
+                    <li><a href="{{ url_for('course_list') }}"><i class="fa fa-check"></i> Published Courses</a></li>
+                    <li><a href="{{ url_for('resume_create') }}"><i class="fa fa-plus"></i> Add Information</a></li>
+                    <li><a href="/faq">Faq</a></li>
+
+                </ul>
+                {% endif %}
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-lock"></i> {{ current_user.name }} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ url_for_security('logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+            {% else %}
+            <ul class="nav navbar-nav navigation">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/faq">Faq</a></li>
+                <!---<li><a href="policy">Policy</a></li>---->
+                <!--<li><a href="#contact">Contact</a></li>-->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/signup">Sign up</a></li>
+                <li><a href="/login"><i class="fa fa-unlock"></i> Login</a></li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% block main %}{% endblock main %}
+{% block content %}{% endblock %}
+
+
+
+  <script src="https://platform.twitter.com/widgets.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </body>
+</html>

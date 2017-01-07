@@ -1,0 +1,137 @@
+{% include "security/_messages.html" %}
+{% from "security/_macros.html" import render_field_with_errors, render_field %}
+{% from "security/common.html" import edit_field %}
+
+
+{% extends "base.html" %}
+<!-- Facebook Conversion Code for Other Website Conversions -Teachera -->
+<script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', '6043684916974', {'value':'0.01','currency':'USD'}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6043684916974&amp;cd[value]=0.01&amp;cd[currency]=USD&amp;noscript=1" /></noscript>
+{% block content %}
+
+<div class="container signup">
+  <div class="row">
+  <div class="col-md-12">
+    <div class="login well">
+      <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form" class="form-horizontal">
+      {{ register_user_form.hidden_tag() }}
+      <h2>Sign up</h2>
+      <div class="control-group">
+          <div class="controls">
+              {{ edit_field(register_user_form.coach) }}
+          </div>
+      </div>
+      <div class="control-group">
+          <div class="controls">
+              {{ edit_field(register_user_form.email, placeholder="Email") }}
+          </div>
+      </div>
+
+      <div class="control-group">
+          <div class="controls">
+              {{ edit_field(register_user_form.name, placeholder="Name") }}
+          </div>
+      </div>
+
+      <div class="control-group">
+          <div class="controls">
+              {{ edit_field(register_user_form.password, placeholder="Password") }}
+              {% if register_user_form.password_confirm %}
+              {{ edit_field(register_user_form.password_confirm, placeholder="Confirm Password") }}
+              {% endif %}
+          </div>
+      </div>
+
+            <!--<button type="submit" class="btn btn-success">Signup</button>-->
+      {{ render_field(register_user_form.submit) }}
+
+    </form>
+    <h2 style="text-align:center;">You can also log in using:<br/>
+      <a href="{{url_for('login_fb')}}"><i class="fa fa-facebook"></i>  Facebook</a></h2>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<style>
+.well {
+  padding: 20px 40px;
+  border-radius: 3px;
+  margin: 0 auto;
+  width: 400px;
+
+}
+.form-control {
+  height: 45px;
+  box-shadow: none;
+  max-width: 100%;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 1.2em;
+  display: table-cell;
+  vertical-align: center;
+}
+.form-control::-webkit-input-placeholder{
+ 
+  font-weight: 200;
+  font-size: .8em;
+  color: rgba(255, 255, 255, .9);
+  padding-top: 3px;
+}
+.form-control::-moz-placeholder {
+ 
+  color: rgba(255, 255, 255, .9);
+  font-weight: 200;
+  font-size: .8em;
+}
+.form-horizontal .form-group {
+  margin-right: 0;
+  margin-left: 0;
+}
+input#submit {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  background-color: green;
+  outline: none;
+  box-shadow: none;
+  border: 2px solid white;
+  color: white;
+  font-size: 1.4em;
+  font-weight: 500;
+  -webkit-transition: background .3s, color .3s;
+  -o-transition: background .3s, color .3s;
+  transition: background .3s, color .3s;
+  border-radius: 3px;
+}
+@media (max-width: 500px) {
+  .well {
+    width: 100%;
+    padding: 10px 20px;
+  }
+  .col-md-12 {
+    padding: 0;
+  }
+  .signup, .login {
+    padding-top: 60px;
+  }
+}
+</style>
+
+
+{% endblock %}
