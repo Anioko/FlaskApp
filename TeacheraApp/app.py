@@ -377,7 +377,19 @@ def course_apply(course_id, course_title):
             flash("You have <strong>already applied</strong> for {0}.".format(course.course_title), 'warning')
             return redirect(url_for('course_list'))
         else:
-            amount = 50  # calculate the amount
+            rent_per_hour_count = course.rent_per_hour / course.min_students
+            amount = 0
+
+            amount1 = course.cost_per_hour * 0.5 + course.cost_per_hour * course.hours_per_month / course.min_students + rent_per_hour_count
+            amount2 = course.cost_per_hour * 0.4 + course.cost_per_hour * course.hours_per_month / course.min_students + rent_per_hour_count
+            amount3 = course.cost_per_hour * 0.6 + course.cost_per_hour * course.hours_per_month  / course.min_students + rent_per_hour_count
+            if course.min_students == len(course.users):
+                amount = amount1
+            elif course.min_students > len(course.users):
+                amount = amount2
+            elif course.min_students < len(course.users):
+                amount = amount3
+
             return render_template('course/payment.html', course=course, amount=amount,
                                    key=app.config.get('STRIPE_PUBLISHABLE_KEY'))
 
@@ -386,7 +398,20 @@ def course_apply(course_id, course_title):
 @login_required
 def charge(course_id, course_title):
     course = db.session.query(Course).get(course_id)
-    amount = 50 * 100  # calculate the amount
+    rent_per_hour_count = course.rent_per_hour / course.min_students
+    amount = 0
+
+    amount1 = course.cost_per_hour * 0.5 + course.cost_per_hour * course.hours_per_month / course.min_students + rent_per_hour_count
+    amount2 = course.cost_per_hour * 0.4 + course.cost_per_hour * course.hours_per_month / course.min_students + rent_per_hour_count
+    amount3 = course.cost_per_hour * 0.6 + course.cost_per_hour * course.hours_per_month  / course.min_students + rent_per_hour_count
+
+    if course.min_students == len(course.users):
+        amount = amount1
+    elif course.min_students > len(course.users):
+        amount = amount2
+    elif course.min_students < len(course.users):
+        amount = amount3
+    amount = amount * 100  # calculate the amount
     customer = stripe.Customer.create(
         email=current_user.email,
         card=request.form['stripeToken']
@@ -394,7 +419,7 @@ def charge(course_id, course_title):
 
     charge = stripe.Charge.create(
         customer=customer.id,
-        amount=amount,
+        amount=int(amount),
         currency='eur',
         description='EUR {amount} Payment for {course_name}'.format(amount=amount, course_name=course.course_title)
     )

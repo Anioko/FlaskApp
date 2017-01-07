@@ -26,6 +26,7 @@ courses_users = db.Table('courses_users',
         db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
         db.Column('course_id', db.Integer(), db.ForeignKey('Courses.id')))
 
+
 class Role(db.Model, RoleMixin):
     __tablename__ = 'role'
     id = Column(Integer(), primary_key=True)
@@ -92,6 +93,7 @@ class Resume(db.Model):
 
 
 
+
 class Course(db.Model):
     """An appointment on the calendar."""
     __tablename__ = 'Courses'
@@ -113,29 +115,45 @@ class Course(db.Model):
 
 
     course_title = Column(String(255))
+    why_description = Column(Text)
+    prerequisites_requirements = Column(Text)
     cost_per_hour = Column(Integer)
+    rent_per_hour = Column(Integer)
     course_module_one = Column(String(255))
+    module_one_description = Column(Text)
     course_module_two = Column(String(255))
+    module_two_description = Column(Text)
     course_module_three = Column(String(255))
+    module_three_description = Column(Text)
     course_module_four = Column(String(255))
+    module_four_description = Column(Text)
     course_module_five = Column(String(255))
+    module_five_description = Column(Text)
     course_module_six = Column(String(255))
+    module_six_description = Column(Text)
     course_module_seven = Column(String(255))
+    module_seven_description = Column(Text)
     course_module_eight = Column(String(255))
+    module_eight_description = Column(Text)
     course_module_nine = Column(String(255))
+    module_ten_description = Column(Text)
     course_module_ten = Column(String(255))
     course_start_date = Column(String(255))
     course_end_date = Column(String(255))
-    hours_per_week = Column(Integer)
+    course_start_hour = Column(String(255))
+    course_end_hour = Column(String(255))
+    hours_per_month = Column(Integer)
     max_students = Column(Integer)
     min_students = Column(Integer)
-    description = Column(Text)
+    level = Column(Integer)
+    bio_of_teacher = Column(Text)
 
     users = relationship('User', secondary=courses_users,
                             backref=backref('User', lazy='dynamic'))
 
     def __repr__(self):
         return u'<{self.__class__.__name__}: {self.id}>'.format(self=self)
+
 
 class Oauth(db.Model):
     __tablename__ = 'oauth'
